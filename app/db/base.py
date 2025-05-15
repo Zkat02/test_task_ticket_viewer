@@ -1,5 +1,6 @@
+from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.orm import DeclarativeBase
 
-class Base(DeclarativeBase):
-    __abstract__ = True
-    __async_attrs__ = True
+
+class Base(AsyncAttrs, DeclarativeBase):
+    pass

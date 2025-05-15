@@ -1,16 +1,16 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Enum
-from sqlalchemy.orm import relationship
-from app.db.base import Base
 import enum
-import asyncio
 
-from app.db.session import engine
+from sqlalchemy import Column, Enum, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+
+from app.db.base import Base
 
 
 class StatusEnum(str, enum.Enum):
     OPEN = "Open"
     IN_PROGRESS = "In Progress"
     COMPLETED = "Completed"
+
 
 class Ticket(Base):
     __tablename__ = "tickets"
@@ -22,6 +22,7 @@ class Ticket(Base):
     user_id = Column(Integer, nullable=False)
 
     watchers = relationship("Watcher", back_populates="ticket", lazy="selectin")
+
 
 class Watcher(Base):
     __tablename__ = "watchers"
